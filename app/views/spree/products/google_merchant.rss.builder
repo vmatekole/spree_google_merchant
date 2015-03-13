@@ -8,18 +8,16 @@ xml.rss "version" => "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
     @production_domain = Spree::GoogleMerchant::Config[:production_domain]
     xml.link @production_domain
 
-    @products.each do |product|
-      # if product.google_merchant_include_variants
-      #   product.variants.each do |variant|
-      #     xml.item do
-      #       xml << render(:partial => 'product_attributes', :locals => { :variant => variant })
-      #     end
-      #   end
-      # else
+    @items.each do |item|
+       if Spree::GoogleMerchant::Manager.include_variants?
+         xml.item do
+           xml << render(:partial => 'product_attributes', :locals => { :variant => item })
+         end
+       else
         xml.item do
-          xml << render(:partial => 'product_attributes', :locals => { :variant => product.master })
+          xml << render(:partial => 'product_attributes', :locals => { :variant => item.master })
         end
-      # end
+       end
     end
   end
 end
