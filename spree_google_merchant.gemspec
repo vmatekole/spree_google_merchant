@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_google_merchant'
-  s.version     = '1.3.0.0.alpha'
+  s.version     = '1.3.0.1.alpha'
   s.summary     = 'Google Merchant RSS feed for Spree 2.4'
   s.description = 'Google Merchant RSS feed for Spree 2.4'
   s.required_ruby_version = '>= 2.0.0'
