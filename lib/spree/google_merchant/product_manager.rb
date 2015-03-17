@@ -1,6 +1,6 @@
 module Spree
   module GoogleMerchant
-    class ProductAttributes
+    class ProductManager
       DEFAULT_MAPPING = {
         google_merchant_product_category: "google_product_category",
         google_merchant_brand: "brand",
