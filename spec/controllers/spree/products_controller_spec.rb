@@ -11,11 +11,11 @@ describe Spree::ProductsController do
       controller.stub :spree_current_user => user
     end
 
-    it 'sets @products instance variable' do
+    it 'sets the right instance variable' do
       spree_get :google_merchant, format: :rss
 
-      assigns(:products).should_not be_nil
-      assigns(:products).first.should eql(product)
+      assigns(:items).should_not be_nil
+      assigns(:items).first.should eql(product)
     end
 
     it 'renders the proper RSS template' do

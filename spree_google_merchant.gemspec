@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails', '~> 2.13'
   s.add_development_dependency 'capybara', '2.1.0'
   s.add_development_dependency 'launchy'
-  s.add_development_dependency 'sass-rails', '~> 4.0.0'
+  s.add_development_dependency 'sass-rails', '~> 4.0.2'
   s.add_development_dependency 'coffee-rails', '~> 4.0.0'
   s.add_development_dependency 'email_spec', '~> 1.5.0'
   s.add_development_dependency 'ffaker'
