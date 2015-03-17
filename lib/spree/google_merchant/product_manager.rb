@@ -11,7 +11,7 @@ module Spree
         google_merchant_gtin: "gtin"
       }
 
-      attr_accessor :product_fallbacks
+      attr_accessor :product_fallbacks, :advertising_image_proc
       attr_writer :include_variants
       attr_reader :product_mapping, :variant_mapping
 
@@ -20,6 +20,7 @@ module Spree
         @product_fallbacks = {}
         @variant_mapping = {}
         @include_variants = false
+        @advertising_image_proc = ->{order(:position)}
       end
 
       def product_mapping=(hash)

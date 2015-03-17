@@ -5,7 +5,7 @@ module Spree
       if GoogleMerchant::Manager.include_variants?
         @items = Variant.active.where(is_master: false).includes(
           :product,
-          :first_image,
+          :advertising_image,
           :default_price,
           :stock_items,
           :master,
