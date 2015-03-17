@@ -74,6 +74,10 @@ module Spree
           value ? values.merge(variant_mapping[key] => value) : values
         end
       end
+
+      def variant_path(variant)
+        'products/' + variant.product.slug
+      end
     end
   end
 end
