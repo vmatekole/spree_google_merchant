@@ -1,6 +1,8 @@
 module Spree
   module GoogleMerchant
     class ProductManager
+      include Spree::BaseHelper
+
       DEFAULT_MAPPING = {
         google_merchant_product_category: "google_product_category",
         google_merchant_brand: "brand",
@@ -77,6 +79,10 @@ module Spree
 
       def variant_path(variant)
         'products/' + variant.product.slug
+      end
+
+      def title(variant)
+        "#{variant.product.name} #{variant_options variant}"
       end
     end
   end
