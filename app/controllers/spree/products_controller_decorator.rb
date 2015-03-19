@@ -18,6 +18,9 @@ module Spree
         @items = Product.active.includes(:variants)
         @properties = GoogleMerchant::Manager.property_set(@items)
       end
+      respond_to do |format|
+        format.any(:xml, :rss) { render formats: [:xml, :rss] }
+      end
     end
   end
 end
