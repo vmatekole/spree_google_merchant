@@ -11,7 +11,7 @@ xml.tag! "g:condition", "new"
 xml.tag! "g:availability", @in_stock.include?(variant.id) ? 'in stock' : 'out of stock'
 xml.tag! "g:price", "#{variant.default_price.display_amount.money} #{variant.default_price.currency}"
 xml.tag! "g:mpn", variant.sku.to_s
-xml.tag! "g:shipping_weight", variant.weight.to_s
+xml.tag! "g:shipping_weight", "#{variant.weight} #{manager.weight_unit}"
 xml.tag! "g:item_group_id", variant.master.sku.to_s if manager.include_variants?
 @properties[variant.product].each do |key, value|
   google_merchant_tag(xml, key, value)

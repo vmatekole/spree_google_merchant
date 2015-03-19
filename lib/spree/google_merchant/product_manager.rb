@@ -11,7 +11,9 @@ module Spree
         google_merchant_gtin: "gtin"
       }
 
-      attr_accessor :product_fallbacks, :advertising_image_proc
+      VALID_WEIGHT_UNITS = %w(lb oz g kg)
+
+      attr_accessor :product_fallbacks, :advertising_image_proc, :weight_unit
       attr_writer :include_variants
       attr_reader :product_mapping, :variant_mapping
 
@@ -21,6 +23,7 @@ module Spree
         @variant_mapping = {}
         @include_variants = false
         @advertising_image_proc = ->{order(:position)}
+        @weight_unit = VALID_WEIGHT_UNITS.first
       end
 
       def product_mapping=(hash)
