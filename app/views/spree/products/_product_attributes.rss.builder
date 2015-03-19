@@ -14,8 +14,8 @@ xml.tag! "g:mpn", variant.sku.to_s
 xml.tag! "g:shipping_weight", variant.weight.to_s
 xml.tag! "g:item_group_id", variant.master.sku.to_s if manager.include_variants?
 @properties[variant.product].each do |key, value|
-  xml.tag! "g:#{key}", value if value
+  google_merchant_tag(xml, key, value)
 end
 manager.option_values_for(variant).each do |key, value|
-  xml.tag! "g:#{key}", value
+  google_merchant_tag(xml, key, value)
 end
