@@ -1,15 +1,9 @@
 require 'spec_helper'
 
-describe Spree::Admin::GoogleMerchantsController do
+describe Spree::Admin::GoogleMerchantsController, type: :controller do
   stub_authorization!
 
-  describe :update do
-    let(:user) { create(:user) }
-
-    before do
-      controller.stub :spree_current_user => user
-    end
-
+  describe 'update' do
     it 'sets Spree::GoogleMerchant::Config to a preferences hash' do
       spree_put :update, preferences: {
         google_merchant_title: 'title',
@@ -17,11 +11,11 @@ describe Spree::Admin::GoogleMerchantsController do
         production_domain: 'domain'
       }, format: :html
 
-      response.should redirect_to spree.admin_google_merchants_path
+      expect(response).to redirect_to spree.admin_google_merchants_path
 
-      Spree::GoogleMerchant::Config.google_merchant_title.should eql('title')
-      Spree::GoogleMerchant::Config.google_merchant_description.should eql('description')
-      Spree::GoogleMerchant::Config.production_domain.should eql('domain')
+      expect(Spree::GoogleMerchant::Config.google_merchant_title).to eq('title')
+      expect(Spree::GoogleMerchant::Config.google_merchant_description).to eq('description')
+      expect(Spree::GoogleMerchant::Config.production_domain).to eq('domain')
     end
   end
 end

@@ -9,3 +9,5 @@ tmp
 nbproject
 *.swp
 .bundle
+Gemfile.lock
+spec/dummy

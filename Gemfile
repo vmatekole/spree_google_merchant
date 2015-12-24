@@ -8,7 +8,7 @@ group :development, :test do
   gem 'poltergeist',      '~> 1.5'
 end
 
-gem 'spree', '~> 2.4.0'
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-4-stable'
+gem 'solidus', '~> 1.1.0'
+gem 'solidus_auth_devise', github: 'solidusio/solidus_auth_devise', branch: 'master'
 
 gemspec
