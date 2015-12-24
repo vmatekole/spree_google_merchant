@@ -16,9 +16,9 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.4'
-  s.add_dependency 'spree_api'
-  s.add_dependency 'spree_backend'
+  s.add_dependency 'solidus_core'
+  s.add_dependency 'solidus_api'
+  s.add_dependency 'solidus_backend'
 
   s.add_development_dependency 'factory_girl_rails', '~> 4.2.0'
   s.add_development_dependency 'rspec-rails', '~> 2.13'
