@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_google_merchant'
-  s.version     = '1.3.0.8.alpha'
-  s.summary     = 'Google Merchant RSS feed for Spree 2.4'
-  s.description = 'Google Merchant RSS feed for Spree 2.4'
+  s.version     = '1.1.0.alpha'
+  s.summary     = 'Google Merchant RSS feed for Solidus 1.1'
+  s.description = 'Google Merchant RSS feed for Solidus 1.1'
   s.required_ruby_version = '>= 2.0.0'
 
-  s.author   = 'Tim Neems, sebastyuiop, Ben Radler'
-  s.email    = 'ben@boombotix.com'
-  s.homepage = 'http://www.spreecommerce.org'
+  s.author   = 'Tim Neems, sebastyuiop, Ben Radler, End Point Corp. (Solidus Migration)'
+  s.email    = 'ask@endpoint.com'
+  s.homepage = 'http://solidus.io'
   s.license  = %q{BSD-3}
 
   s.files        = `git ls-files`.split("\n")
