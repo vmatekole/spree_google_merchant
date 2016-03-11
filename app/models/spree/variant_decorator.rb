@@ -8,5 +8,9 @@ module Spree
     )
     has_one :master, ->{ where(is_master: true) }, primary_key: :product_id, foreign_key: :product_id, class_name: "Spree::Variant"
     has_one :first_non_master, ->{ where(is_master: false).order(:id) }, primary_key: :product_id, foreign_key: :product_id, class_name: "Spree::Variant"
+
+    def advertising_image_url
+      advertising_image.try(:attachment).try(:url, :product)
+    end
   end
 end

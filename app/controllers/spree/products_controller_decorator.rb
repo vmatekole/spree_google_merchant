@@ -1,8 +1,9 @@
 module Spree
   ProductsController.class_eval do
+    helper_method :manager, :include_variants?, :in_stock, :properties
+
     def google_merchant
-      @in_stock = Variant.in_stock.pluck(:id)
-      if GoogleMerchant::Manager.include_variants?
+      if include_variants?
         @items = full_variants
         @properties = GoogleMerchant::Manager.property_set(
           @items.collect(&:product).uniq.sort_by(&:id)
@@ -34,6 +35,22 @@ module Spree
         :first_non_master,
         {option_values: :option_type}
       ).references(t2_name)
+    end
+
+    def manager
+      @manager ||= GoogleMerchant::Manager
+    end
+
+    def include_variants?
+      manager.include_variants?
+    end
+
+    def in_stock
+      @in_stock ||= Variant.in_stock.pluck(:id)
+    end
+
+    def properties
+      @properties
     end
   end
 end

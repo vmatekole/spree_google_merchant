@@ -18,6 +18,26 @@ describe Spree::ProductsController do
       assigns(:items).first.should eql(product)
     end
 
+    context 'with full_variants set' do
+      before do
+        Spree::GoogleMerchant::Manager.include_variants = true
+      end
+
+      it 'sets the right instance variable with only master variants' do
+        spree_get :google_merchant, format: :rss
+
+        assigns(:items).first.should eql(product.master)
+      end
+
+      it 'sets the right instance variable with multiple variants' do
+        variant = create(:variant, product: product)
+
+        spree_get :google_merchant, format: :rss
+
+        assigns(:items).first.should eql(variant)
+      end
+    end
+
     it 'renders the proper RSS template' do
       spree_get :google_merchant, format: :rss
 

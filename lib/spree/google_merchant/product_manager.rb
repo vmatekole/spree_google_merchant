@@ -35,27 +35,19 @@ module Spree
       end
 
       def product_keys
-        @product_mapping.keys
+        product_mapping.keys
       end
 
       def variant_keys
-        @variant_mapping.keys
+        variant_mapping.keys
       end
 
       def include_variants?
-        @include_variants
+        @include_variants.present?
       end
 
       def property_ids
         Spree::Property.where(name: product_keys)
-      end
-
-      def lookup_properties
-        @properties = Spree::ProductProperty.google_properties.inject(
-          Hash.new { [] }
-        ) do |properties, pp|
-          properties.merge(pp.product_id => (properties[pp.product_id] || []) << pp)
-        end
       end
 
       def property_set(products)
@@ -65,18 +57,12 @@ module Spree
         end
       end
 
-      def properties_for(product)
-        @properties[product.id].inject(
-          HashWithIndifferentAccess.new(@product_fallbacks)
-        ) do |x, gp|
-          x.merge(@product_mapping[gp.name] => gp.value)
-        end
-      end
-
       def option_values_for(variant)
-        all_values = variant.option_values
+        all_values = options_for(variant).inject({}) do |x,k|
+          x.merge(k.option_type.name => k)
+        end
         variant_keys.inject(HashWithIndifferentAccess.new) do |values, key|
-          value = all_values.detect {|v| v.option_type.name == key}.try(:presentation)
+          value = all_values[key].try(:presentation)
           value ? values.merge(variant_mapping[key] => value) : values
         end
       end
@@ -87,6 +73,43 @@ module Spree
 
       def title(variant)
         "#{variant.product.name} #{variant_options variant}"
+      end
+
+      def feed_title
+        Spree::GoogleMerchant::Config[:google_merchant_title]
+      end
+
+      def feed_description
+        Spree::GoogleMerchant::Config[:google_merchant_description]
+      end
+
+      def production_domain
+        Spree::GoogleMerchant::Config[:production_domain]
+      end
+
+      private
+
+      attr_reader :properties
+
+      def lookup_properties
+        @properties = Spree::ProductProperty.google_properties.inject(
+          Hash.new { [] }
+        ) do |set, pp|
+          id = pp.product_id
+          set.merge(id => set[id] << pp)
+        end
+      end
+
+      def properties_for(product)
+        properties[product.id].inject(
+          HashWithIndifferentAccess.new(product_fallbacks)
+        ) do |set, pp|
+          set.merge(product_mapping[pp.name] => pp.value)
+        end
+      end
+
+      def options_for(variant)
+        variant.option_values.select { |ov| ov.option_type.name.in?(variant_keys) }
       end
     end
   end
