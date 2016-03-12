@@ -4,7 +4,7 @@ module SpreeGoogleMerchant
 
       def add_initializer
         create_file "config/initializers/google_merchant.rb", <<-FILE
-# # Override the manager:
+# Override the manager:
 # module Spree
 #   module GoogleMerchant
 #     class CustomProductManager < ProductManager
@@ -12,12 +12,14 @@ module SpreeGoogleMerchant
 #       def variant_path(variant)
 #         'products/' + variant.product.slug
 #       end
+#
+#       .
+#       .
+#       .
+#
 #     end
 #
-#     .
-#     .
-#     .
-#
+#     send(:remove_const, :Manager)
 #     Manager = CustomProductManager.new
 #   end
 # end
