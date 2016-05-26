@@ -23,7 +23,7 @@ module Spree
         @variant_mapping = {}
         @include_variants = false
         @advertising_image_proc = ->{order(:position)}
-        @weight_unit = VALID_WEIGHT_UNITS.first
+        @weight_unit = VALID_WEIGHT_UNITS.third
       end
 
       def product_mapping=(hash)
